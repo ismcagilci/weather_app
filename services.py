@@ -52,12 +52,36 @@ async def get_weather_data_and_write_to_db(city, date):
 
 # check the date format is correct "YYYY-MM-DD with a valid date"
 # check the date about it is 7 days in the past or 7 days in the future
-def validate_date(date):
+def validate_date(start_date, end_date):
     try:
-        datetime.datetime.strptime(date, "%Y-%m-%d")
+        datetime.datetime.strptime(start_date, "%Y-%m-%d")
+        datetime.datetime.strptime(end_date, "%Y-%m-%d")
     except ValueError:
         raise HTTPException(status_code=400, detail="Invalid date format. Please use YYYY-MM-DD with a valid date")
-    date = datetime.datetime.strptime(date, "%Y-%m-%d")
+    date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
     today = datetime.datetime.now()
     if date > today + datetime.timedelta(days=7) or date < today - datetime.timedelta(days=7):
         raise HTTPException(status_code=400, detail="Date must be within 7 days from today")
+    date = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+    today = datetime.datetime.now()
+    if date > today + datetime.timedelta(days=7) or date < today - datetime.timedelta(days=7):
+        raise HTTPException(status_code=400, detail="Date must be within 7 days from today")
+
+
+def create_date_list(start_date, end_date):
+    # Convert the input strings to datetime objects
+    start_date_obj = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    end_date_obj = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+
+    # Create an empty list to store the dates
+    date_list = []
+
+    # Iterate from start_date to end_date
+    current_date = start_date_obj
+    while current_date <= end_date_obj:
+        # Append the current date in "YYYY-MM-DD" format to the list
+        date_list.append(current_date.strftime("%Y-%m-%d"))
+        # Move to the next day
+        current_date += datetime.timedelta(days=1)
+
+    return date_list

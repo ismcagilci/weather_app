@@ -9,5 +9,6 @@ fastapi dev .\main.py --port 6000
 
 * you can call api via postman
 * POST -> localhost/weather/{city}
+* you shold send start_date,end_date and type(c or f) -> celcius or fahrenheit in request body 
 ![image](https://github.com/ismcagilci/weather_app/assets/50598846/2eb2744d-4b05-46fe-843d-fb4f94b9614e)
 

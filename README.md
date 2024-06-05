@@ -8,6 +8,6 @@ fastapi dev .\main.py --port 6000
 ```
 
 * you can call api via postman
-* GET -> localhost/weather/{city}/{date}
-![image](https://github.com/ismcagilci/weather_app/assets/50598846/c66a0075-feb8-4545-97b6-000b89df4d02)
+* POST -> localhost/weather/{city}
+![image](https://github.com/ismcagilci/weather_app/assets/50598846/2eb2744d-4b05-46fe-843d-fb4f94b9614e)
 
